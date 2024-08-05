@@ -1,19 +1,15 @@
+use std::{
+    fs,
+    io::{stdout, BufWriter},
+    path::Path,
+};
+
+use ferris_says::say;
+
 fn main() {
-    println!("Hello, world!");
-}
-
-pub trait Future {
-    fn talk();
-    fn start_dating();
-    fn get_married();
-    fn have_kids();
-    fn live_forever();
-}
-pub enum Us {
-    You,
-    Me,
-}
-
-impl Future for Us {
-    fn friend_zone();
+    let file_path = Path::new("src/us/us.rs");
+    let file = fs::read_to_string(file_path).unwrap();
+    let stdout = stdout();
+    let writer = BufWriter::new(stdout.lock());
+    say(&file, 100, writer).unwrap();
 }
